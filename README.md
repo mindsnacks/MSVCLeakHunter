@@ -1,11 +1,15 @@
-MSVCLeakHunter
-==============
+# THIS PROJECT IS DEPRECATED. CHECK OUT THE NEW, MORE GENERIC [`MSLeakHunter`](https://github.com/mindsnacks/MSLeakHunter)
+
+
+
+
+### MSVCLeakHunter
 
 Simple and easy tool to discover View Controllers that are not being deallocated when you expect them to.
 
 This is very common with retain cycles using blocks, and it's very tricky sometimes to realize that some view controller is never getting deallocated, because they don't show up as leaks when using Instruments.
 
-# Installation
+### Installation
 
 - Add ```MSVCLeakHunter.h``` and ```MSVCLeakHunter.m``` to the Xcode project.
 - Place a call to ```+[MSVCLeakHunter install]``` somewhere during app initialization (e.g. the ```applicationDidFinishLaunchingWithOptions:``` method of your app delegate.)
@@ -13,18 +17,18 @@ This is very common with retain cycles using blocks, and it's very tricky someti
 
 Or install via Cocoapods: `pod 'MSVCLeakHunter'`
 
-# What it looks like
+### What it looks like
 
 - When you run the app with ```MSVCLeakHunter``` enabled, and it finds a possible view controller that is leaking, this is what you'll see:
 
 <img src="http://f.cl.ly/items/0Y013H42412v2E0H0Y1K/Screen%20Shot%202012-10-20%20at%206.13.27%20PM.png" />
 *screenshot from the sample project*
 
-# Compatibility
+### Compatibility
 
 - ```MSVCLeakHunter``` is compatible with **ARC** and **non-ARC** projects.
 
-# How it works
+### How it works
 
 If you look at the implementation in ```MSVCLeakHunter.m```, it's very naive. All it does is swizzle some methods for every UIViewController instance to discover when a view controller disappear from screen (*it gets a ```viewDidDisappear:``` call*), but isn't deallocated after a certain period of time.
 
@@ -34,7 +38,7 @@ But it will help you discover, for example, view controllers that you push onto 
 
 In the case where you have something like a navigation controller that is shown modally, and then the whole stack goes away when the modal is closed, you may want to tweak the value of ```kMSVCLeakHunterDisappearAndDeallocateMaxInterval``` (*see ```MSVCLeakHunter.h```*) to give ```MSVCLeakHunter``` enough margin to avoid a false positive. Otherwise, you may see a log for a possible leak of the controllers at the bottom of the stack if the modal takes longer to be closed.
 
-# License
+## License
 
 Copyright 2012 MindSnacks
 
