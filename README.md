@@ -15,7 +15,7 @@ This is very common with retain cycles using blocks, and it's very tricky someti
 - Place a call to ```+[MSVCLeakHunter install]``` somewhere during app initialization (e.g. the ```applicationDidFinishLaunchingWithOptions:``` method of your app delegate.)
 - Make sure ```MSVCLeakHunter_ENABLED``` is set to 1 in ```MSVCLeakHunter.h```
 
-Or install via Cocoapods: `pod 'MSVCLeakHunter'`
+Or install via CocoaPods: `pod 'MSVCLeakHunter'`
 
 ### What it looks like
 
